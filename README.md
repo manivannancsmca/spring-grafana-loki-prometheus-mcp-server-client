@@ -48,3 +48,14 @@ services:
     command: -config.file=/etc/promtail/config.yml
     networks:
       - monitoring
+---
+
+### 🏃 Execution & Operation Playbook
+Follow this exact sequence to start up your stack and clean your system memory boundaries.
+
+### Step 1: Fire up Environment Dependencies
+Ensure Ollama is running and has the target model pulled, then boot up your background telemetry cluster:
+
+```bash
+ollama run llama3
+docker compose up -d
