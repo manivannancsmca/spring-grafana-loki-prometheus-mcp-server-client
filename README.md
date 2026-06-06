@@ -57,8 +57,8 @@ Follow this exact sequence to start up your stack and clean your system memory b
 Ensure Ollama is running and has the target model pulled, then boot up your background telemetry cluster:
 
 ```bash
-ollama run llama3
-docker compose up -d
+   ollama run llama3
+   docker compose up -d
 
 ### Step 2: Spin Up the Processing Layer (Order Matters)
 Start the MCP Server Execution Engine on port 8081 first. It will declare the schema metadata definitions.
@@ -66,3 +66,12 @@ Start the MCP Server Execution Engine on port 8081 first. It will declare the sc
 Start the AI Chat Client application on port 8011. Upon context initializing, it hooks up to the server via SSE to register your remote tools.
 
 ⚠️ Important Senior Dev Tip: If you change your code on the server or find the LLM stuck looping on an old explanation, restart the AI Client App to clear its in-memory conversation context stack.
+
+---
+
+### Step 3: Run Diagnostic Queries via cURL
+Open a separate command window terminal and interact with your logs using natural language:
+
+Query 1: Review Runtime Exceptions
+```bash
+   curl "http://localhost:8011/ai/ask?prompt=Scan+the+logs+now+for+any+RuntimeException+and+list+the+details"
