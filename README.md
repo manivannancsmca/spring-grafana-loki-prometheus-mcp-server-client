@@ -14,3 +14,37 @@ This solution splits responsibilities into two decoupled Spring Boot 3.x microse
 2. **Business Core / MCP Server (`mcp-server` : Port 8081)**
    - Exposes capabilities to the protocol via `@McpTool`.
    - Connects to your live Dockerized Grafana Loki cluster utilizing optimized LogQL range filters (`/loki/api/v1/query_range`).
+
+---
+
+## 🚀 Step-by-Step Implementation Guide
+
+### 1. Infrastructure Setup (Docker Compose)
+Create a `docker-compose.yml` file to spin up Loki, Promtail, and Grafana.
+
+```yaml
+version: '3.8'
+
+networks:
+  monitoring:
+    driver: bridge
+
+services:
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitoring
+
+  promtail:
+    image: grafana/promtail:3.0.0
+    container_name: promtail
+    volumes:
+      - /var/log/apps:/var/log/apps
+      - ./promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - monitoring
