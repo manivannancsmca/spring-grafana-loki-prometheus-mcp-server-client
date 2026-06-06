@@ -59,3 +59,10 @@ Ensure Ollama is running and has the target model pulled, then boot up your back
 ```bash
 ollama run llama3
 docker compose up -d
+
+### Step 2: Spin Up the Processing Layer (Order Matters)
+Start the MCP Server Execution Engine on port 8081 first. It will declare the schema metadata definitions.
+
+Start the AI Chat Client application on port 8011. Upon context initializing, it hooks up to the server via SSE to register your remote tools.
+
+⚠️ Important Senior Dev Tip: If you change your code on the server or find the LLM stuck looping on an old explanation, restart the AI Client App to clear its in-memory conversation context stack.
