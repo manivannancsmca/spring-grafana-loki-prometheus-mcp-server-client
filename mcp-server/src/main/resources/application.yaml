@@ -1,0 +1,19 @@
+
+server:
+  port: 8013
+
+spring:
+  application:
+    name: business-mcp-server
+
+loki:
+  url: http://localhost:3100
+  label-key: job       # Matches your exact log snippet metadata 
+  label-value: springboot # Matches your exact log snippet metadata
+
+logging:
+  file:
+    # Points to the exact local relative directory mounted into Promtail
+    name: E:/development/June 2026/spring-grafana-loki-prometheus-mcp server-client/grafana-loki/logs/application.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

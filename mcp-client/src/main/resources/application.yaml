@@ -1,0 +1,16 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: ai-mcp-client
+  ai:
+    mcp:
+      client:
+        type: sync
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.1 # Must support tool calling
+          temperature: 0.1

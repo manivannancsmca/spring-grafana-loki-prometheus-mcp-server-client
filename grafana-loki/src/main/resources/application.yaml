@@ -1,0 +1,40 @@
+server:
+  port: 8010
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    health:
+      show-details: always
+logging:
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
+  file:
+    name: E:/development/June 2026/spring-grafana-loki-prometheus-mcp server-client/grafana-loki/logs/application.log
+  level:
+    com:
+      example:
+        product: DEBUG
+    root: INFO
+spring:
+  application:
+    name: grafana-loki
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://localhost:3306/product_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
